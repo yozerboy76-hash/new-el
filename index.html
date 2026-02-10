@@ -2,34 +2,235 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EL-PAMUNGKAS GEN-X</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>El-00-01 El-Crasher | ELXITERS</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
-        .glitch-box { border: 2px solid #0f0; padding: 40px; text-align: center; box-shadow: 0 0 20px #0f0; background: rgba(0, 255, 0, 0.05); }
-        h1 { font-size: 20px; letter-spacing: 5px; animation: blink 1s infinite; }
-        .cmd { color: #fff; background: #222; padding: 10px; margin: 20px 0; font-size: 12px; border-radius: 5px; }
-        .btn-work { display: block; width: 100%; padding: 15px; background: #0f0; color: #000; text-decoration: none; font-weight: bold; border: none; cursor: pointer; margin-top: 10px; }
-        .btn-work:hover { background: #fff; }
-        @keyframes blink { 50% { opacity: 0; } }
+        :root {
+            --neon-green: #66ff00; --neon-pink: #ff007f; --neon-blue: #00ccff;
+            --bg-dark: #050505; --card-bg: #111111;
+        }
+
+        /* CUSTOM LOGO URL DI SINI TUAN */
+        /* Ganti URL di bawah untuk ganti foto profil/logo */
+        #logo-img { content: url('https://remaining-yellow-lpbdtgrclu.edgeone.app/ic_launcher.jpg'); }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg-dark); color: #fff; margin: 0; padding-bottom: 110px; overflow-x: hidden; }
+
+        /* ☬ LOGIN ☬ */
+        #login-page { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; }
+        .login-box { width: 85%; max-width: 380px; background: rgba(15,15,15,0.95); padding: 40px; border-radius: 30px; border: 1px solid var(--neon-green); text-align: center; }
+        .login-box input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid var(--neon-green); border-radius: 12px; color: #fff; text-align: center; outline: none; }
+
+        /* ☬ HEADER ☬ */
+        .status-header { background: rgba(102, 255, 0, 0.1); color: var(--neon-green); padding: 8px 15px; font-size: 10px; font-weight: bold; border-bottom: 1px solid var(--neon-green); display: flex; justify-content: space-between; position: sticky; top: 0; z-index: 101; }
+        .top-bar { display: flex; justify-content: space-between; padding: 15px 20px; background: var(--bg-dark); align-items: center; }
+        
+        .menu-dots { cursor: pointer; padding: 5px; position: relative; }
+        .dropdown-profile { 
+            position: absolute; top: 60px; right: 20px; width: 220px; background: #161616; 
+            border: 1px solid var(--neon-green); border-radius: 20px; display: none; z-index: 1002;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); padding: 20px; text-align: center;
+        }
+        .dropdown-profile.show { display: block; animation: fadeIn 0.3s; }
+
+        /* ☬ DASHBOARD ☬ */
+        .page { display: none; padding: 0 15px; animation: slideUp 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .welcome-banner { 
+            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+            padding: 25px; border-radius: 25px; border: 1px solid #222; margin: 15px 0;
+            border-left: 5px solid var(--neon-green);
+        }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .stat-card { background: var(--card-bg); padding: 15px; border-radius: 20px; border: 1px solid #222; display: flex; align-items: center; gap: 12px; }
+        .stat-icon { color: var(--neon-green); font-size: 20px; background: rgba(102, 255, 0, 0.1); padding: 10px; border-radius: 12px; }
+
+        /* ☬ ATTACK TOOLS ☬ */
+        .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 15px; }
+        .tool-btn { background: #141414; padding: 20px; border-radius: 22px; border: 1px solid #222; text-align: center; position: relative; overflow: hidden; }
+        .tool-btn i { font-size: 24px; color: var(--neon-green); margin-bottom: 10px; display: block; }
+        .tool-btn span { font-size: 10px; font-weight: bold; text-transform: uppercase; }
+        .badge-kill { position: absolute; top: 10px; right: 10px; background: #f00; font-size: 7px; padding: 2px 5px; border-radius: 5px; animation: flash 0.5s infinite; }
+        @keyframes flash { 50% { opacity: 0; } }
+
+        /* ☬ NAVBAR ☬ */
+        .navbar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(10,10,10,0.9); height: 75px; border-radius: 35px; display: flex; justify-content: space-around; align-items: center; border: 1px solid #333; backdrop-filter: blur(10px); z-index: 999; }
+        .nav-item { color: #555; text-align: center; cursor: pointer; }
+        .nav-item.active { color: var(--neon-green); transform: translateY(-5px); transition: 0.3s;}
+        .nav-item span { display: block; font-size: 9px; margin-top: 4px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="glitch-box">
-    <h1>☬ PANEL CREATOR ☬</h1>
-    <p style="font-size: 10px;">SYSTEM STATUS: READY TO DEPLOY</p>
-    
-    <div class="cmd">
-        ID: admin | PASS: admin123
+    <audio id="myMusic" loop preload="auto">
+        <source src="https://s17.aconvert.com/convert/p3r68-cdx67/rggml-360u0.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="login-page">
+        <div class="login-box">
+            <img id="logo-img" style="width:80px; height:80px; border-radius:20px; border: 2px solid var(--neon-green); margin-bottom:20px; object-fit: cover;">
+            <h2 style="margin:0">ELXITERS</h2>
+            <p style="color:var(--neon-green); font-size:10px; letter-spacing:4px; margin-bottom:25px;">El-Crasher LOGIN</p>
+            <input type="text" id="user" placeholder="Username">
+            <input type="password" id="pass" placeholder="Access Key">
+            <button onclick="login()" style="width:100%; padding:15px; background:var(--neon-green); border:none; border-radius:15px; font-weight:900; color:#000;">LOGIN</button>
+        </div>
     </div>
 
-    <a href="https://github.com/yozerboy76-hash/el-pamungkas/actions/workflows/main.yml" target="_blank" class="btn-work">1. NYALAKAN PANEL (RUN)</a>
+    <div class="status-header">
+        <span>CORE: el-crasher</span>
+        <span>MUSIC: <span id="mus-status" style="color:var(--neon-pink)">WAITING</span></span>
+    </div>
+    
+    <div class="top-bar">
+        <div style="font-weight:900; font-size:22px; color:var(--neon-green);">ELXITERS PRO</div>
+        <div class="menu-dots" onclick="toggleDrop()"><i class="fa fa-ellipsis-v" style="font-size:20px;"></i></div>
+    </div>
 
-    <a href="https://preference-husband-knit-governments.trycloudflare.com" target="_blank" class="btn-work">2. MASUK SINGGASANA</a>
+    <div id="prof-drop" class="dropdown-profile">
+        <img id="logo-img" style="width:60px; height:60px; border-radius:50%; border:2px solid var(--neon-green); margin-bottom:10px; object-fit: cover;">
+        <h4 style="margin:0;">Dark El.v</h4>
+        <p style="font-size:9px; color:var(--neon-pink);">OWNER SUPREME</p>
+        <hr style="border:0.1px solid #333; margin:15px 0;">
+        <p style="font-size:10px; color:#aaa;">STATUS: AUTHORIZED</p>
+    </div>
 
-    <p style="font-size: 9px; margin-top: 20px; color: #888;">*Klik tombol 1 dulu, tunggu 1 menit, baru klik tombol 2.</p>
-</div>
+    <div id="home" class="page active">
+        <div class="welcome-banner">
+            <h6 style="margin:0; color:var(--neon-green);">SYSTEM STATUS: ONLINE</h6>
+            <h2 style="margin:5px 0;">Halo, Dark El.v!</h2>
+            <p style="margin:0; font-size:11px; color:#888;">Musik Galau SpeedUp Aktif. Hancurkan target dengan gaya, Tuan.</p>
+        </div>
 
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fa fa-user-crown stat-icon"></i>
+                <div><h6 style="margin:0; color:#555;">Owner</h6><b>Dark El.v</b></div>
+            </div>
+            <div class="stat-card">
+                <i class="fa fa-calendar-alt stat-icon" style="color:var(--neon-pink); background:rgba(255,0,127,0.1);"></i>
+                <div><h6 style="margin:0; color:#555;">Expired</h6><b>9999 Days</b></div>
+            </div>
+            <div class="stat-card">
+                <i class="fa fa-virus-slash stat-icon" style="color:var(--neon-blue); background:rgba(0,204,255,0.1);"></i>
+                <div><h6 style="margin:0; color:#555;">Anti-Ban</h6><b>Active</b></div>
+            </div>
+            <div class="stat-card">
+                <i class="fa fa-shield-virus stat-icon"></i>
+                <div><h6 style="margin:0; color:#555;">Engine</h6><b>elxiters-crasher</b></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="attack" class="page">
+        <input type="text" id="target" style="width:100%; padding:18px; background:#000; border:1px solid #333; border-radius:15px; color:#fff;" placeholder="Target: 628xxx">
+        <div class="tools-grid">
+            <div class="tool-btn" onclick="runBug('BOOTLOOP')"><span class="badge-kill">KILL</span><i class="fa fa-sync-alt"></i><span>BOOTLOOP</span></div>
+            <div class="tool-btn" onclick="runBug('INVISIBLE')"><span class="badge-kill">KILL</span><i class="fa fa-user-secret"></i><span>INVISIBLE</span></div>
+            <div class="tool-btn" onclick="runBug('RESET DATA')"><span class="badge-kill">KILL</span><i class="fa fa-trash-alt"></i><span>RESET HP</span></div>
+            <div class="tool-btn" onclick="runBug('FC DELAY')"><span class="badge-kill">KILL</span><i class="fa fa-clock"></i><span>FC DELAY</span></div>
+            <div class="tool-btn" onclick="runBug('HACK DATA')"><span class="badge-kill">KILL</span><i class="fa fa-database"></i><span>HACK DATA</span></div>
+            
+            <div class="tool-btn" onclick="runBug('KENON')"><i class="fa fa-ban"></i><span>KENON WA</span></div>
+            <div class="tool-btn" onclick="runBug('UNKENON')" style="border: 1px solid var(--neon-green);"><i class="fa fa-unlock" style="color:var(--neon-green)"></i><span style="color:var(--neon-green)">UNKENON WA</span></div>
+            <div class="tool-btn" onclick="runBug('SPAM PAIRING')"><i class="fa fa-link-slash"></i><span>PAIRING SPAM</span></div>
+            <div class="tool-btn" onclick="runBug('CRASH WA')"><i class="fa fa-bomb"></i><span>CRASH WA</span></div>
+            <div class="tool-btn" onclick="runBug('VIRTEX')"><i class="fa fa-biohazard"></i><span>VIRTEX</span></div>
+        </div>
+    </div>
+
+    <div id="sender" class="page">
+        <div style="padding:25px; background:var(--card-bg); border-radius:25px; border: 1px solid #222;">
+            <h4 style="color:var(--neon-blue);">SENDER SYSTEM</h4>
+            <input type="tel" id="snd-num" style="width:100%; padding:15px; background:#000; border:1px solid var(--neon-blue); border-radius:15px; color:#fff;" placeholder="628xxx">
+            <button onclick="getPair()" style="width:100%; margin-top:15px; padding:18px; background:var(--neon-blue); border:none; border-radius:15px; font-weight:bold; color:#000;">CONNECT SENDER</button>
+            <div id="p-code" style="display:none; margin-top:20px; text-align:center; font-size:35px; color:#fff; font-weight:900;">Z7X-ELX</div>
+        </div>
+    </div>
+
+    <div id="ai" class="page">
+        <div id="ai-chat" style="height:320px; background:#000; border-radius:20px; padding:20px; overflow-y:auto; border:1px solid #222; margin-bottom:15px;">
+            <div style="color:var(--neon-green);"><b>AI:</b> Hormat Tuan ELXITERS! Unkenon sudah hamba amankan kembali. Musik Galau sudah siap.</div>
+        </div>
+        <div style="display:flex; gap:10px;">
+            <input type="text" id="ai-in" style="flex:1; padding:15px; background:#111; border:1px solid #333; border-radius:15px; color:#fff;" placeholder="Perintah...">
+            <button onclick="askAI()" style="background:var(--neon-green); width:60px; border-radius:15px; border:none;"><i class="fa fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-item active" onclick="tab('home')"><i class="fa fa-th-large"></i><span>Home</span></div>
+        <div class="nav-item" onclick="tab('attack')"><i class="fa fa-skull"></i><span>Attack</span></div>
+        <div class="nav-item" onclick="tab('sender')"><i class="fa fa-qrcode"></i><span>Sender</span></div>
+        <div class="nav-item" onclick="tab('ai')"><i class="fa fa-robot"></i><span>AI Chat</span></div>
+    </div>
+
+    <script>
+        let linked = false;
+        const music = document.getElementById("myMusic");
+
+        function login() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            if(u === "elxiters" && p === "elxiters") {
+                document.getElementById('login-page').style.display = 'none';
+                
+                // FORCE PLAY AUDIO
+                music.play().then(() => {
+                    document.getElementById('mus-status').innerText = "PLAYING";
+                }).catch(err => {
+                    console.log("Audio Error: ", err);
+                    document.getElementById('mus-status').innerText = "ERROR";
+                });
+
+                Swal.fire({
+                    title: 'el-crasher access',
+                    text: 'Selamat Datang Kembali, Tuan ELXITERS!',
+                    icon: 'success',
+                    background: '#000',
+                    color: '#66ff00'
+                });
+            } else { Swal.fire('Error', 'Username/Key Salah!', 'error'); }
+        }
+
+        function tab(name) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function runBug(name) {
+            const target = document.getElementById('target').value;
+            if(!target) return Swal.fire('Error', 'Input Target!', 'error');
+            Swal.fire('EXECUTING', `${name} Gacor menyerang ${target}`, 'success');
+        }
+
+        function getPair() {
+            document.getElementById('p-code').style.display = 'block';
+            linked = true;
+            Swal.fire('CONNECTED', 'Sender Siap!', 'success');
+        }
+
+        function askAI() {
+            const i = document.getElementById('ai-in');
+            const c = document.getElementById('ai-chat');
+            if(!i.value) return;
+            c.innerHTML += `<div style="text-align:right; margin-bottom:10px;">${i.value}</div>`;
+            setTimeout(() => {
+                c.innerHTML += `<div style="color:var(--neon-green); margin-bottom:10px;"><b>AI:</b> Laksanakan Tuan! [${i.value}] dikerjakan dengan mode Gacor.</div>`;
+                c.scrollTop = c.scrollHeight;
+            }, 600);
+            i.value = "";
+        }
+
+        function toggleDrop() { document.getElementById('prof-drop').classList.toggle('show'); }
+    </script>
 </body>
-</html>
+        </html>
