@@ -2,54 +2,34 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>VOIDWARE - INSTANT DOMAIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL-PAMUNGKAS GEN-X</title>
     <style>
-        body { background: #050505; color: #00ff41; font-family: 'Consolas', monospace; text-align: center; padding-top: 50px; }
-        .box { border: 2px solid #00ff41; display: inline-block; padding: 30px; box-shadow: 0 0 20px #00ff41; background: #000; }
-        input { background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; width: 250px; margin: 10px; }
-        button { background: #00ff41; color: #000; padding: 10px 20px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .result { margin-top: 20px; font-weight: bold; color: yellow; }
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .glitch-box { border: 2px solid #0f0; padding: 40px; text-align: center; box-shadow: 0 0 20px #0f0; background: rgba(0, 255, 0, 0.05); }
+        h1 { font-size: 20px; letter-spacing: 5px; animation: blink 1s infinite; }
+        .cmd { color: #fff; background: #222; padding: 10px; margin: 20px 0; font-size: 12px; border-radius: 5px; }
+        .btn-work { display: block; width: 100%; padding: 15px; background: #0f0; color: #000; text-decoration: none; font-weight: bold; border: none; cursor: pointer; margin-top: 10px; }
+        .btn-work:hover { background: #fff; }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <h1>[ DOMAIN GENERATOR ]</h1>
-    <p>Status: <span style="color:white">READY TO BYPASS</span></p>
+<div class="glitch-box">
+    <h1>☬ PANEL CREATOR ☬</h1>
+    <p style="font-size: 10px;">SYSTEM STATUS: READY TO DEPLOY</p>
     
-    <input type="text" id="domainName" placeholder="Nama Domain (Contoh: manzzstore)">
-    <br>
-    <select id="suffix" style="background:#000; color:#00ff41; padding:10px; border:1px solid #00ff41;">
-        <option value=".is-a.dev">.is-a.dev (Sangat Pro)</option>
-        <option value=".mooo.com">.mooo.com</option>
-        <option value=".chickenkiller.com">.chickenkiller.com</option>
-    </select>
-    <br><br>
-    <button onclick="deploy()">ACTIVATE DOMAIN</button>
-    <div id="output" class="result"></div>
+    <div class="cmd">
+        ID: admin | PASS: admin123
+    </div>
+
+    <a href="https://github.com/yozerboy76-hash/el-pamungkas/actions/workflows/main.yml" target="_blank" class="btn-work">1. NYALAKAN PANEL (RUN)</a>
+
+    <a href="https://preference-husband-knit-governments.trycloudflare.com" target="_blank" class="btn-work">2. MASUK SINGGASANA</a>
+
+    <p style="font-size: 9px; margin-top: 20px; color: #888;">*Klik tombol 1 dulu, tunggu 1 menit, baru klik tombol 2.</p>
 </div>
-
-<script>
-function deploy() {
-    const name = document.getElementById('domainName').value;
-    const suffix = document.getElementById('suffix').value;
-    const out = document.getElementById('output');
-
-    if(name.length < 3) {
-        out.innerHTML = "ERROR: NAMA TERLALU PENDEK!";
-        return;
-    }
-
-    out.style.color = "#00ff41";
-    out.innerHTML = "MENGHUBUNGKI SERVER DNS...<br>SEDANG MENGINJEKSI DATABASE...";
-
-    setTimeout(() => {
-        // Logika bypass: Mengarahkan user ke registrasi publik tanpa form manual
-        const finalUrl = `https://${name}${suffix}`;
-        out.innerHTML = `SUKSES! DOMAIN DIPESAN:<br><a href="${finalUrl}" style="color:yellow">${finalUrl}</a><br><br><span style="font-size:12px; color:white">Catatan: Untuk mengaktifkan konten, upload file index.html ini ke GitHub dengan nama repository "${name}${suffix}"</span>`;
-    }, 2000);
-}
-</script>
 
 </body>
 </html>
