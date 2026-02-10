@@ -1,0 +1,22 @@
+name: CREATE_PANEL_GRATIS
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Eksekusi Panel
+        run: |
+          # Memberikan izin penuh (Root) agar tidak error lagi
+          sudo apt update
+          sudo -E bash <(curl -s https://pterodactyl-installer.se) <<EOF
+          0
+          elxitersstore.my.id
+          Asia/Jakarta
+          admin@elxiters.com
+          admin@elxiters.com
+          admin
+          admin
+          admin
+          admin123
+          EOF
